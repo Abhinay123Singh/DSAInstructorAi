@@ -21,17 +21,17 @@
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
-  background: #374151;
+  background: #1f2937;
   border-radius: 10px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #6b7280;
+  background: #059669;
   border-radius: 10px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #10b981;
 }
 
 /* Bounce animation for typing indicator */

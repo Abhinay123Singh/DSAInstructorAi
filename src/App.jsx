@@ -673,27 +673,31 @@ The more specific your question, the more detailed explanation I can provide! �
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl bg-gray-800 shadow-xl rounded-lg p-6 space-y-4 border border-gray-700">
+    <div className="min-h-screen bg-gradient-to-br from-green-900 via-emerald-800 to-green-900 flex items-center justify-center p-4">
+      <div className="w-full max-w-2xl bg-gray-900/90 backdrop-blur-sm shadow-2xl rounded-2xl p-6 space-y-4 border border-green-600/30">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-100">🤖 DSA Instructor AI</h1>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+            🤖 DSA Instructor AI
+          </h1>
           <button
             onClick={clearChat}
-            className="text-gray-400 hover:text-gray-200 text-sm px-3 py-1 rounded-md hover:bg-gray-700 transition"
+            className="text-gray-400 hover:text-green-300 text-sm px-4 py-2 rounded-lg hover:bg-green-900/30 border border-green-700/50 hover:border-green-500/50 transition-all duration-200"
           >
-            Clear Chat
+            ✨ Clear Chat
           </button>
         </div>
 
         {showSuggestions && (
-          <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
-            <h3 className="text-sm font-semibold text-gray-300 mb-2">Quick Questions:</h3>
+          <div className="bg-green-900/40 backdrop-blur-sm rounded-xl p-5 border border-green-600/40 shadow-lg">
+            <h3 className="text-sm font-semibold text-green-300 mb-3 flex items-center">
+              💡 Quick Questions to Get Started:
+            </h3>
             <div className="flex flex-wrap gap-2">
               {quickQuestions.map((question, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleQuickQuestion(question)}
-                  className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1 rounded-full transition transform hover:scale-105"
+                  className="text-xs bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white px-4 py-2 rounded-full transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-green-500/25"
                 >
                   {question}
                 </button>
@@ -702,16 +706,16 @@ The more specific your question, the more detailed explanation I can provide! �
           </div>
         )}
 
-        <div className="h-96 overflow-y-auto space-y-2 px-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+        <div className="h-96 overflow-y-auto space-y-3 px-3 scrollbar-thin scrollbar-thumb-green-600 scrollbar-track-gray-800/50 bg-gray-800/30 rounded-xl border border-green-700/20">
           {messages.map((msg, idx) => (
             <ChatBubble key={idx} message={msg} />
           ))}
           
           {isTyping && (
             <div className="flex justify-start animate-fade-in">
-              <div className="bg-green-500 text-white px-4 py-2 rounded-xl max-w-xs">
-                <div className="flex items-center space-x-1">
-                  <span>AI is thinking</span>
+              <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-5 py-3 rounded-2xl max-w-xs shadow-lg border border-green-400/30">
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm font-medium">🧠 AI is thinking</span>
                   <div className="flex space-x-1">
                     <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
@@ -726,11 +730,11 @@ The more specific your question, the more detailed explanation I can provide! �
         </div>
 
         <div className="space-y-2">
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <input
-              className="flex-1 px-4 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 placeholder-gray-400 transition"
+              className="flex-1 px-5 py-3 border border-green-600/50 bg-gray-800/80 text-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 placeholder-gray-400 transition-all duration-200 backdrop-blur-sm shadow-inner"
               type="text"
-              placeholder="Ask about Data Structures & Algorithms..."
+              placeholder="💬 Ask about Data Structures & Algorithms..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
@@ -739,14 +743,14 @@ The more specific your question, the more detailed explanation I can provide! �
             <button
               onClick={handleSend}
               disabled={isTyping || !input.trim()}
-              className="bg-indigo-500 hover:bg-indigo-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg transition transform hover:scale-105"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white px-8 py-3 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-green-500/25 font-semibold"
             >
-              {isTyping ? "..." : "Send"}
+              {isTyping ? "⏳" : "🚀 Send"}
             </button>
           </div>
           
-          <div className="text-xs text-gray-400 text-center">
-            💡 Tip: Ask about specific algorithms, data structures, or complexity analysis!
+          <div className="text-sm text-green-300/80 text-center bg-green-900/20 py-2 px-4 rounded-lg border border-green-700/30">
+            ✨ Tip: Ask about specific algorithms, data structures, or complexity analysis!
           </div>
         </div>
       </div>

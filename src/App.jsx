@@ -17,9 +17,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-100 to-pink-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-xl bg-white shadow-xl rounded-lg p-6 space-y-4">
-        <h1 className="text-2xl font-bold text-center text-indigo-700">🤖 DSA Instructor AI</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center p-4">
+      <div className="w-full max-w-xl bg-gray-800 shadow-xl rounded-lg p-6 space-y-4 border border-gray-700">
+        <h1 className="text-2xl font-bold text-center text-gray-100">🤖 DSA Instructor AI</h1>
 
         <div className="h-96 overflow-y-auto space-y-2 px-2 scrollbar-thin">
           {messages.map((msg, idx) => (
@@ -29,7 +29,7 @@ export default function App() {
 
         <div className="flex gap-2">
           <input
-            className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="flex-1 px-4 py-2 border border-gray-600 bg-gray-700 text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 placeholder-gray-400"
             type="text"
             placeholder="Ask about Data Structures & Algorithms..."
             value={input}

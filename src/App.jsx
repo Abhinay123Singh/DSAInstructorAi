@@ -17,7 +17,13 @@ export default function App() {
     "What are linked lists?",
     "How does a stack work?",
     "What is recursion?",
-    "Explain sorting algorithms"
+    "Explain sorting algorithms",
+    "What are hash tables?",
+    "How do heaps work?",
+    "What is dynamic programming?",
+    "Explain graph algorithms",
+    "What are trees?",
+    "How does BFS differ from DFS?"
   ];
 
   const scrollToBottom = () => {
@@ -50,6 +56,13 @@ An array is a collection of elements stored in contiguous memory locations. Each
 🔹 **Types of Arrays:**
 • Static Arrays: Fixed size at compile time
 • Dynamic Arrays: Resizable (like vectors in C++, ArrayList in Java)
+• Multi-dimensional: 2D arrays, matrices
+
+🔹 **Array Algorithms:**
+• Two Pointers: For pair problems, palindromes
+• Sliding Window: For subarray problems
+• Prefix Sum: For range query problems
+• Kadane's Algorithm: Maximum subarray sum
 
 🔹 **When to Use Arrays:**
 ✅ When you need fast access to elements by index
@@ -57,10 +70,11 @@ An array is a collection of elements stored in contiguous memory locations. Each
 ✅ For mathematical computations and matrix operations
 ✅ As building blocks for other data structures
 
-🔹 **Example Use Cases:**
-• Storing grades of students
-• Representing images (2D arrays of pixels)
-• Implementing other data structures (heaps, hash tables)
+🔹 **Common Interview Problems:**
+• Two Sum, Three Sum
+• Maximum Subarray (Kadane's)
+• Rotate Array, Merge Sorted Arrays
+• Dutch National Flag Problem
 
 Would you like me to explain any specific array operations or algorithms?`,
 
@@ -69,13 +83,25 @@ Would you like me to explain any specific array operations or algorithms?`,
 🔹 **What is Big O?**
 Big O notation describes the upper bound of an algorithm's time or space complexity. It tells us how the runtime or memory usage grows as the input size increases.
 
-🔹 **Common Time Complexities:**
-• O(1) - Constant: Same time regardless of input size
-• O(log n) - Logarithmic: Binary search, balanced trees
-• O(n) - Linear: Single loop through data
-• O(n log n) - Linearithmic: Efficient sorting algorithms
+🔹 **Common Time Complexities (Best to Worst):**
+• O(1) - Constant: Array access, hash table lookup
+• O(log n) - Logarithmic: Binary search, balanced tree operations
+• O(n) - Linear: Single loop, linear search
+• O(n log n) - Linearithmic: Merge sort, heap sort
 • O(n²) - Quadratic: Nested loops, bubble sort
+• O(n³) - Cubic: Triple nested loops
 • O(2ⁿ) - Exponential: Recursive fibonacci (naive)
+• O(n!) - Factorial: Traveling salesman (brute force)
+
+🔹 **Space Complexity:**
+• O(1) - Constant extra space
+• O(n) - Linear extra space (most algorithms)
+• O(log n) - Recursive call stack space
+
+🔹 **Analysis Rules:**
+• Drop constants: O(2n) → O(n)
+• Drop lower order terms: O(n² + n) → O(n²)
+• Different inputs use different variables: O(a + b)
 
 🔹 **Why It Matters:**
 Understanding Big O helps you choose the right algorithm for your problem size and predict performance as data grows.
@@ -88,25 +114,36 @@ Want to dive deeper into analyzing specific algorithms?`,
 Binary search finds a target value in a sorted array by repeatedly dividing the search space in half.
 
 🔹 **Algorithm Steps:**
-1. Start with the middle element
-2. If target equals middle, found!
-3. If target < middle, search left half
-4. If target > middle, search right half
-5. Repeat until found or search space is empty
+1. Set left = 0, right = n-1
+2. While left ≤ right:
+   - Calculate mid = left + (right - left) / 2
+   - If arr[mid] == target, return mid
+   - If arr[mid] < target, left = mid + 1
+   - If arr[mid] > target, right = mid - 1
+3. Return -1 (not found)
 
-🔹 **Time Complexity:** O(log n)
-🔹 **Space Complexity:** O(1) iterative, O(log n) recursive
+🔹 **Complexity:**
+• Time: O(log n) - Halves search space each iteration
+• Space: O(1) iterative, O(log n) recursive
 
 🔹 **Prerequisites:**
 ⚠️ Array must be sorted!
 
-🔹 **Applications:**
-• Searching in databases
-• Finding insertion points
-• Square root calculation
-• Peak finding problems
+🔹 **Variants:**
+• Find first/last occurrence
+• Find insertion position
+• Search in rotated sorted array
+• Find peak element
 
-Would you like to see a code implementation?`,
+🔹 **Template Pattern:**
+Most binary search problems follow: while (left < right) pattern with careful boundary handling.
+
+🔹 **Applications:**
+• Database indexing
+• Finding square roots
+• Capacity/resource allocation problems
+
+Would you like to see code implementations or explore variants?`,
 
       "linked list": `🔗 **Linked Lists - Dynamic Memory Management**
 
@@ -116,105 +153,417 @@ Each node contains:
 • Pointer/Reference: Points to the next node
 
 🔹 **Types:**
-• Singly Linked: One direction traversal
-• Doubly Linked: Bidirectional traversal
-• Circular Linked: Last node points to first
+• **Singly Linked:** One direction traversal
+• **Doubly Linked:** Bidirectional with prev/next pointers
+• **Circular Linked:** Last node points to first
+• **Multiply Linked:** Multiple pointers per node
 
 🔹 **Time Complexities:**
 • Access: O(n) - Must traverse from head
 • Search: O(n) - Linear search
-• Insertion: O(1) at head, O(n) at position
+• Insertion: O(1) at head/tail, O(n) at position
 • Deletion: O(1) at head, O(n) at position
 
 🔹 **Advantages:**
-✅ Dynamic size
+✅ Dynamic size - grows/shrinks during runtime
 ✅ Efficient insertion/deletion at beginning
-✅ Memory efficient (no wasted space)
+✅ Memory efficient - no wasted space
 
 🔹 **Disadvantages:**
-❌ No random access
+❌ No random access - must traverse sequentially
 ❌ Extra memory for pointers
-❌ Not cache-friendly
+❌ Not cache-friendly - nodes scattered in memory
 
-Ready to explore specific linked list operations?`,
+🔹 **Common Patterns:**
+• **Two Pointers:** Fast/slow for cycle detection
+• **Dummy Node:** Simplifies edge cases
+• **Reverse:** Iterative and recursive approaches
+
+🔹 **Classic Problems:**
+• Reverse linked list
+• Detect cycle (Floyd's algorithm)
+• Merge two sorted lists
+• Find middle node
+• Remove nth node from end
+
+Ready to explore specific linked list algorithms?`,
 
       "stack": `📚 **Stack - Last In, First Out (LIFO)**
 
 🔹 **Core Operations:**
-• Push: Add element to top - O(1)
-• Pop: Remove element from top - O(1)
-• Peek/Top: View top element - O(1)
-• isEmpty: Check if stack is empty - O(1)
+• **Push:** Add element to top - O(1)
+• **Pop:** Remove element from top - O(1)
+• **Peek/Top:** View top element - O(1)
+• **isEmpty:** Check if stack is empty - O(1)
 
 🔹 **Implementation Options:**
-• Array-based: Fixed size, simple
-• Linked list-based: Dynamic size
+• **Array-based:** Fixed size, simple implementation
+• **Linked list-based:** Dynamic size, more complex
 
 🔹 **Real-World Applications:**
 • Function call management (call stack)
-• Undo operations in editors
+• Undo operations in text editors
 • Expression evaluation and syntax parsing
 • Browser back button functionality
 • Depth-First Search (DFS) traversal
 
 🔹 **Problem-Solving Patterns:**
-• Parentheses matching
-• Reverse Polish notation
-• Monotonic stack problems
+• **Parentheses Matching:** Valid brackets, balanced expressions
+• **Expression Evaluation:** Infix to postfix, calculator
+• **Monotonic Stack:** Next greater/smaller element
+• **Backtracking:** Store states for exploration
+
+🔹 **Classic Stack Problems:**
+• Valid Parentheses
+• Daily Temperatures (monotonic stack)
+• Largest Rectangle in Histogram
+• Evaluate Reverse Polish Notation
+• Min Stack (with O(1) min operation)
+
+🔹 **Stack vs Queue:**
+Stack: LIFO - Recent items processed first
+Queue: FIFO - Oldest items processed first
 
 Want to explore stack-based algorithms or see implementations?`,
+
+      "queue": `🚶‍♂️ **Queue - First In, First Out (FIFO)**
+
+🔹 **Core Operations:**
+• **Enqueue:** Add element to rear - O(1)
+• **Dequeue:** Remove element from front - O(1)
+• **Front:** View front element - O(1)
+• **isEmpty:** Check if queue is empty - O(1)
+
+🔹 **Types:**
+• **Simple Queue:** Basic FIFO structure
+• **Circular Queue:** Efficient space usage
+• **Priority Queue:** Elements with priorities
+• **Deque:** Double-ended queue (insert/delete both ends)
+
+🔹 **Implementation:**
+• Array-based with front/rear pointers
+• Linked list-based for dynamic size
+
+🔹 **Applications:**
+• CPU scheduling in operating systems
+• Breadth-First Search (BFS) traversal
+• Handling requests in web servers
+• Print queue management
+• Buffer for data streams
+
+🔹 **BFS Pattern:**
+Queue is essential for level-order traversal and shortest path problems in unweighted graphs.
+
+🔹 **Common Problems:**
+• Sliding Window Maximum (using deque)
+• Binary Tree Level Order Traversal
+• Rotting Oranges (multi-source BFS)
+• Number of Islands (BFS approach)
+
+Ready to explore queue applications in graph algorithms?`,
+
+      "tree": `🌳 **Trees - Hierarchical Data Organization**
+
+🔹 **Basic Concepts:**
+• **Root:** Top node with no parent
+• **Leaf:** Node with no children
+• **Height:** Longest path from root to leaf
+• **Depth:** Distance from root to node
+• **Subtree:** Tree rooted at any node
+
+🔹 **Binary Trees:**
+Each node has at most 2 children (left, right)
+• **Full:** Every node has 0 or 2 children
+• **Complete:** All levels filled except possibly last
+• **Perfect:** All internal nodes have 2 children
+• **Balanced:** Height difference ≤ 1 for all nodes
+
+🔹 **Tree Traversals:**
+• **Inorder:** Left → Root → Right (gives sorted order in BST)
+• **Preorder:** Root → Left → Right (good for copying)
+• **Postorder:** Left → Right → Root (good for deletion)
+• **Level Order:** BFS traversal using queue
+
+🔹 **Binary Search Tree (BST):**
+• Left subtree < root < right subtree
+• Search, Insert, Delete: O(log n) average, O(n) worst
+• Inorder traversal gives sorted sequence
+
+🔹 **Balanced Trees:**
+• **AVL Tree:** Self-balancing, height difference ≤ 1
+• **Red-Black Tree:** Color-based balancing rules
+• **B-Trees:** Multi-way trees for databases
+
+🔹 **Common Tree Problems:**
+• Maximum depth/height
+• Validate BST
+• Lowest Common Ancestor
+• Tree serialization/deserialization
+• Path sum problems
+
+Which tree concept would you like to explore deeper?`,
+
+      "graph": `📊 **Graphs - Modeling Relationships and Networks**
+
+🔹 **Graph Components:**
+• **Vertices (Nodes):** Individual entities
+• **Edges:** Connections between vertices
+• **Weight:** Cost/distance of an edge
+• **Degree:** Number of edges connected to a vertex
+
+🔹 **Types of Graphs:**
+• **Directed vs Undirected:** One-way vs two-way edges
+• **Weighted vs Unweighted:** Edges with/without costs
+• **Cyclic vs Acyclic:** Contains cycles or not
+• **Connected vs Disconnected:** All nodes reachable or not
+
+🔹 **Graph Representations:**
+• **Adjacency Matrix:** 2D array - O(V²) space, O(1) edge lookup
+• **Adjacency List:** Array of lists - O(V+E) space, efficient for sparse graphs
+• **Edge List:** List of all edges - O(E) space
+
+🔹 **Graph Traversal Algorithms:**
+• **DFS (Depth-First Search):** Uses stack, explores deep
+• **BFS (Breadth-First Search):** Uses queue, explores level by level
+
+🔹 **Shortest Path Algorithms:**
+• **Dijkstra's:** Single source, non-negative weights - O((V+E)log V)
+• **Bellman-Ford:** Single source, handles negative weights - O(VE)
+• **Floyd-Warshall:** All pairs shortest path - O(V³)
+
+🔹 **Other Important Algorithms:**
+• **Topological Sort:** Ordering for DAGs
+• **Union-Find:** For cycle detection, MST
+• **Minimum Spanning Tree:** Kruskal's, Prim's algorithms
+
+🔹 **Applications:**
+• Social networks, GPS navigation
+• Web crawling, dependency resolution
+• Network flow, matching problems
+
+Which graph algorithm interests you most?`,
+
+      "hash": `🔍 **Hash Tables - Fast Key-Value Storage**
+
+🔹 **Core Concept:**
+Hash tables use a hash function to map keys to array indices, providing average O(1) access time.
+
+🔹 **Hash Function Properties:**
+• **Deterministic:** Same input → same output
+• **Uniform Distribution:** Spreads keys evenly
+• **Fast Computation:** Quick to calculate
+• **Avalanche Effect:** Small input changes → big output changes
+
+🔹 **Collision Resolution:**
+• **Chaining:** Store multiple values in linked lists
+• **Open Addressing:** Find another empty slot
+  - Linear Probing: Check next slot
+  - Quadratic Probing: Check i² slots away
+  - Double Hashing: Use second hash function
+
+🔹 **Time Complexity:**
+• **Average Case:** O(1) for search, insert, delete
+• **Worst Case:** O(n) when all keys hash to same bucket
+• **Load Factor:** n/m (items/buckets) affects performance
+
+🔹 **Applications:**
+• Database indexing
+• Caching mechanisms
+• Symbol tables in compilers
+• Removing duplicates
+• Implementing sets and maps
+
+🔹 **Hash Table Problems:**
+• Two Sum (using hash map)
+• Group Anagrams
+• Longest Substring Without Repeating Characters
+• Design HashMap/HashSet
+
+🔹 **Real Implementations:**
+• Python: dict, set
+• Java: HashMap, HashSet
+• C++: unordered_map, unordered_set
+
+Want to explore hash function design or collision handling?`,
+
+      "heap": `⛰️ **Heaps - Priority-Based Data Structure**
+
+🔹 **Heap Properties:**
+• **Complete Binary Tree:** All levels filled except possibly last
+• **Heap Property:** Parent-child relationship maintained
+  - Max Heap: Parent ≥ children
+  - Min Heap: Parent ≤ children
+
+🔹 **Core Operations:**
+• **Insert:** Add element, bubble up - O(log n)
+• **Extract-Max/Min:** Remove root, bubble down - O(log n)
+• **Peek:** View root element - O(1)
+• **Heapify:** Convert array to heap - O(n)
+
+🔹 **Array Representation:**
+For node at index i:
+• Left child: 2i + 1
+• Right child: 2i + 2
+• Parent: (i-1)/2
+
+🔹 **Applications:**
+• **Priority Queues:** Process highest priority first
+• **Heap Sort:** O(n log n) sorting algorithm
+• **Dijkstra's Algorithm:** Shortest path finding
+• **Huffman Coding:** Data compression
+• **Task Scheduling:** Operating systems
+
+🔹 **Common Heap Problems:**
+• Kth Largest/Smallest Element
+• Merge K Sorted Lists
+• Top K Frequent Elements
+• Find Median from Data Stream
+• Sliding Window Maximum
+
+🔹 **Heap vs Other Structures:**
+• Heap vs BST: Faster insertion, no ordering guarantee
+• Heap vs Array: Faster min/max access
+• Heap vs Queue: Priority-based vs FIFO
+
+🔹 **Advanced Heaps:**
+• Fibonacci Heap: Better for decrease-key operations
+• Binomial Heap: Efficient merge operations
+
+Which heap application would you like to explore?`,
 
       "recursion": `🔄 **Recursion - Elegant Problem Solving**
 
 🔹 **Key Components:**
-• Base Case: Condition to stop recursion
-• Recursive Case: Function calls itself with smaller input
+• **Base Case:** Condition to stop recursion (prevents infinite loops)
+• **Recursive Case:** Function calls itself with smaller/simpler input
+• **Progress:** Each call must move toward base case
 
 🔹 **How It Works:**
-Each recursive call adds a new frame to the call stack. When base case is reached, functions return in reverse order.
+Each recursive call adds a new frame to the call stack. When base case is reached, functions return in reverse order (stack unwinding).
 
-🔹 **Types:**
-• Direct: Function calls itself
-• Indirect: Functions call each other cyclically
-• Tail Recursion: Recursive call is the last operation
+🔹 **Types of Recursion:**
+• **Direct:** Function calls itself
+• **Indirect:** Functions call each other cyclically
+• **Tail Recursion:** Recursive call is the last operation
+• **Tree Recursion:** Multiple recursive calls (like fibonacci)
 
-🔹 **Common Patterns:**
-• Divide & Conquer: Merge sort, quick sort
-• Tree Traversal: DFS, tree operations
-• Backtracking: N-queens, sudoku solver
-• Mathematical: Factorial, fibonacci
+🔹 **Recursion Patterns:**
+• **Divide & Conquer:** Break problem into smaller subproblems
+  - Merge Sort, Quick Sort, Binary Search
+• **Backtracking:** Try all possibilities, undo if needed
+  - N-Queens, Sudoku Solver, Generate Parentheses
+• **Tree Traversal:** Navigate tree structures
+  - Inorder, Preorder, Postorder
 
 🔹 **Time/Space Analysis:**
-Often O(n) space due to call stack overhead.
+• Time depends on number of recursive calls
+• Space: O(h) where h is maximum call stack depth
+• Tree recursion often leads to exponential time
+
+🔹 **Common Recursive Problems:**
+• Factorial, Fibonacci sequence
+• Tree traversals and operations
+• Permutations and combinations
+• Palindrome checking
+• Tower of Hanoi
+
+🔹 **Recursion vs Iteration:**
+• Recursion: More elegant, easier to understand
+• Iteration: More efficient (no call stack overhead)
+
+🔹 **Optimization Techniques:**
+• **Memoization:** Cache results to avoid recomputation
+• **Tail Call Optimization:** Some languages optimize tail recursion
 
 Ready to master recursive thinking with specific examples?`,
 
       "sorting": `🎲 **Sorting Algorithms - Organizing Data Efficiently**
 
-🔹 **Popular Algorithms:**
+🔹 **Comparison-Based Sorts:**
 
-**Simple Sorts:**
-• Bubble Sort: O(n²) - Educational, inefficient
-• Selection Sort: O(n²) - Unstable, simple
-• Insertion Sort: O(n²) - Good for small/nearly sorted
+**Simple Sorts (O(n²)):**
+• **Bubble Sort:** Repeatedly swap adjacent elements
+• **Selection Sort:** Find minimum, swap with first
+• **Insertion Sort:** Insert each element in correct position
 
-**Efficient Sorts:**
-• Merge Sort: O(n log n) - Stable, divide & conquer
-• Quick Sort: O(n log n) avg - In-place, cache-efficient
-• Heap Sort: O(n log n) - In-place, not stable
+**Efficient Sorts (O(n log n)):**
+• **Merge Sort:** Divide, sort, merge - stable, consistent performance
+• **Quick Sort:** Choose pivot, partition - in-place, cache-efficient
+• **Heap Sort:** Build heap, extract max - in-place, not stable
 
-**Special Purpose:**
-• Counting Sort: O(n+k) - For integers in range
-• Radix Sort: O(d×n) - For fixed-width data
-• Bucket Sort: O(n) avg - For uniformly distributed data
+🔹 **Non-Comparison Sorts:**
+• **Counting Sort:** O(n+k) - for integers in small range
+• **Radix Sort:** O(d×n) - sort by digits/characters
+• **Bucket Sort:** O(n) avg - for uniformly distributed data
+
+🔹 **Sorting Properties:**
+• **Stable:** Equal elements maintain relative order
+• **In-place:** Uses O(1) extra space
+• **Adaptive:** Performs better on partially sorted data
 
 🔹 **Choosing the Right Sort:**
-• Stability needed? → Merge Sort
-• Memory constrained? → Heap Sort
-• Average case performance? → Quick Sort
-• Small dataset? → Insertion Sort
+• **Stability needed?** → Merge Sort
+• **Memory constrained?** → Heap Sort or Quick Sort
+• **Average performance?** → Quick Sort
+• **Small dataset?** → Insertion Sort
+• **Nearly sorted?** → Insertion Sort (adaptive)
+• **Integer range known?** → Counting/Radix Sort
 
-Which sorting algorithm interests you most?`
+🔹 **Sorting in Practice:**
+• Most libraries use hybrid approaches (Timsort, Introsort)
+• Consider data characteristics and constraints
+• Quick Sort with random pivot for average case
+
+🔹 **Advanced Sorting:**
+• External sorting for data larger than memory
+• Parallel sorting algorithms
+• Online sorting algorithms
+
+Which sorting algorithm would you like to explore in detail?`,
+
+      "dynamic programming": `💎 **Dynamic Programming - Optimizing Through Memorization**
+
+🔹 **Core Principles:**
+• **Overlapping Subproblems:** Same subproblems solved multiple times
+• **Optimal Substructure:** Optimal solution contains optimal subsolutions
+• **Memoization:** Top-down approach with caching
+• **Tabulation:** Bottom-up approach building solutions
+
+🔹 **DP Approaches:**
+• **Top-Down (Memoization):** Recursive with cache
+• **Bottom-Up (Tabulation):** Iterative, fill table
+
+🔹 **DP Patterns:**
+• **Linear DP:** 1D problems (Fibonacci, House Robber)
+• **Grid DP:** 2D problems (Unique Paths, Min Path Sum)
+• **Interval DP:** Problems on ranges (Matrix Chain Multiplication)
+• **Tree DP:** Problems on trees (Diameter, Maximum Path Sum)
+• **Digit DP:** Problems with digit constraints
+• **Bitmask DP:** Problems with subsets
+
+🔹 **Classic DP Problems:**
+• **Fibonacci Sequence:** Introduction to DP
+• **0/1 Knapsack:** Include/exclude decisions
+• **Longest Common Subsequence:** String matching
+• **Edit Distance:** String transformation
+• **Coin Change:** Making change with minimum coins
+• **Longest Increasing Subsequence:** Subsequence optimization
+
+🔹 **DP Optimization:**
+• **Space Optimization:** Reduce 2D to 1D when possible
+• **Rolling Array:** Keep only necessary previous states
+• **State Compression:** Use bitmasks for subset states
+
+🔹 **When to Use DP:**
+✅ Problem has overlapping subproblems
+✅ Optimal substructure exists
+✅ Recursive solution has exponential time complexity
+
+🔹 **DP vs Other Approaches:**
+• DP vs Greedy: DP guarantees optimal, greedy may not
+• DP vs Backtracking: DP avoids recomputation
+
+Ready to solve some classic DP problems step by step?`
     };
 
     const lowerMessage = userMessage.toLowerCase();
@@ -226,20 +575,72 @@ Which sorting algorithm interests you most?`
     
     // More intelligent fallback responses
     if (lowerMessage.includes("what") || lowerMessage.includes("explain") || lowerMessage.includes("how")) {
-      return `🤔 **I'd love to help you learn!** 
+      return `🤔 **I'd love to help you learn DSA!** 
 
-I can provide detailed explanations about:
-• **Data Structures**: Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hash Tables
-• **Algorithms**: Sorting, Searching, Graph Traversal, Dynamic Programming
-• **Concepts**: Time/Space Complexity, Big O Notation, Recursion
+I can provide comprehensive explanations about:
 
-Try asking something like:
-"What is an array?" or "Explain binary search" or "How does recursion work?"
+**📚 Data Structures:**
+• Arrays, Linked Lists, Stacks, Queues
+• Trees (Binary, BST, AVL, Red-Black)
+• Graphs (Directed/Undirected, Weighted)
+• Hash Tables, Heaps, Tries
 
-What specific topic would you like to explore? 🚀`;
+**⚡ Algorithms:**
+• Sorting (Quick, Merge, Heap, Counting, Radix)
+• Searching (Binary Search, DFS, BFS)
+• Graph Algorithms (Dijkstra, Bellman-Ford, Topological Sort)
+• Dynamic Programming, Greedy Algorithms
+• Divide & Conquer, Backtracking
+
+**🎯 Core Concepts:**
+• Time/Space Complexity Analysis
+• Big O, Omega, Theta Notation
+• Recursion and Mathematical Induction
+• Algorithm Design Patterns
+
+**💡 Try asking:**
+"What is an array and its time complexities?"
+"Explain merge sort step by step"
+"How does Dijkstra's algorithm work?"
+"What is dynamic programming with examples?"
+
+What specific DSA topic would you like to master? 🚀`;
     }
     
-    return "That's a great question! In DSA, we focus on efficient problem-solving. Could you be more specific about which data structure or algorithm you'd like to learn about?";
+    // Enhanced keyword matching for broader coverage
+    const keywords = {
+      "bfs": "breadth first search",
+      "dfs": "depth first search", 
+      "dijkstra": "dijkstra",
+      "dp": "dynamic programming",
+      "trie": "trie",
+      "avl": "tree",
+      "red black": "tree",
+      "priority queue": "heap",
+      "fibonacci": "recursion",
+      "kadane": "array",
+      "sliding window": "array",
+      "two pointer": "array",
+      "backtrack": "recursion",
+      "greedy": "greedy algorithm",
+      "memoization": "dynamic programming"
+    };
+    
+    for (const [keyword, topic] of Object.entries(keywords)) {
+      if (lowerMessage.includes(keyword)) {
+        return responses[topic] || `🤔 That's an interesting topic about ${topic}! Could you be more specific about what aspect you'd like to learn?`;
+      }
+    }
+    
+    return `🤔 **Great question!** I'm here to help you master Data Structures and Algorithms! 
+
+Could you be more specific about which topic you'd like to explore? For example:
+• "Explain arrays and their complexities"
+• "How does binary search work?"
+• "What's the difference between DFS and BFS?"
+• "Teach me about dynamic programming"
+
+The more specific your question, the more detailed explanation I can provide! 🎯`;
   };
 
   const handleSend = () => {

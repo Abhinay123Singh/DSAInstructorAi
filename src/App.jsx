@@ -30,12 +30,191 @@ export default function App() {
 
   const getAIResponse = (userMessage) => {
     const responses = {
-      "big o": "Big O notation describes the time complexity of algorithms. It helps us understand how the runtime grows as input size increases. Common complexities include O(1), O(log n), O(n), O(n²), etc.",
-      "binary search": "Binary search is an efficient algorithm that finds a target value in a sorted array by repeatedly dividing the search interval in half. Time complexity: O(log n).",
-      "linked list": "A linked list is a data structure where elements are stored in nodes, and each node contains data and a pointer to the next node. Unlike arrays, elements aren't stored in contiguous memory.",
-      "stack": "A stack is a LIFO (Last In, First Out) data structure. Elements are added and removed from the same end called the 'top'. Main operations: push, pop, peek.",
-      "recursion": "Recursion is a programming technique where a function calls itself to solve smaller instances of the same problem. It needs a base case to stop the recursion.",
-      "sorting": "Common sorting algorithms include Bubble Sort O(n²), Merge Sort O(n log n), Quick Sort O(n log n), and Heap Sort O(n log n). Each has different trade-offs."
+      "array": `📚 **Arrays - The Foundation of Data Structures**
+
+🔹 **What is an Array?**
+An array is a collection of elements stored in contiguous memory locations. Each element can be accessed using an index (position number starting from 0).
+
+🔹 **Key Characteristics:**
+• Fixed size (in most languages)
+• Elements of the same data type
+• Random access - O(1) time to access any element
+• Cache-friendly due to memory locality
+
+🔹 **Common Operations & Time Complexity:**
+• Access: O(1) - Direct index access
+• Search: O(n) - Linear search through elements
+• Insertion: O(n) - May need to shift elements
+• Deletion: O(n) - May need to shift elements
+
+🔹 **Types of Arrays:**
+• Static Arrays: Fixed size at compile time
+• Dynamic Arrays: Resizable (like vectors in C++, ArrayList in Java)
+
+🔹 **When to Use Arrays:**
+✅ When you need fast access to elements by index
+✅ When memory usage needs to be predictable
+✅ For mathematical computations and matrix operations
+✅ As building blocks for other data structures
+
+🔹 **Example Use Cases:**
+• Storing grades of students
+• Representing images (2D arrays of pixels)
+• Implementing other data structures (heaps, hash tables)
+
+Would you like me to explain any specific array operations or algorithms?`,
+
+      "big o": `📊 **Big O Notation - Understanding Algorithm Efficiency**
+
+🔹 **What is Big O?**
+Big O notation describes the upper bound of an algorithm's time or space complexity. It tells us how the runtime or memory usage grows as the input size increases.
+
+🔹 **Common Time Complexities:**
+• O(1) - Constant: Same time regardless of input size
+• O(log n) - Logarithmic: Binary search, balanced trees
+• O(n) - Linear: Single loop through data
+• O(n log n) - Linearithmic: Efficient sorting algorithms
+• O(n²) - Quadratic: Nested loops, bubble sort
+• O(2ⁿ) - Exponential: Recursive fibonacci (naive)
+
+🔹 **Why It Matters:**
+Understanding Big O helps you choose the right algorithm for your problem size and predict performance as data grows.
+
+Want to dive deeper into analyzing specific algorithms?`,
+
+      "binary search": `🎯 **Binary Search - The Power of Divide & Conquer**
+
+🔹 **How It Works:**
+Binary search finds a target value in a sorted array by repeatedly dividing the search space in half.
+
+🔹 **Algorithm Steps:**
+1. Start with the middle element
+2. If target equals middle, found!
+3. If target < middle, search left half
+4. If target > middle, search right half
+5. Repeat until found or search space is empty
+
+🔹 **Time Complexity:** O(log n)
+🔹 **Space Complexity:** O(1) iterative, O(log n) recursive
+
+🔹 **Prerequisites:**
+⚠️ Array must be sorted!
+
+🔹 **Applications:**
+• Searching in databases
+• Finding insertion points
+• Square root calculation
+• Peak finding problems
+
+Would you like to see a code implementation?`,
+
+      "linked list": `🔗 **Linked Lists - Dynamic Memory Management**
+
+🔹 **Structure:**
+Each node contains:
+• Data: The actual value
+• Pointer/Reference: Points to the next node
+
+🔹 **Types:**
+• Singly Linked: One direction traversal
+• Doubly Linked: Bidirectional traversal
+• Circular Linked: Last node points to first
+
+🔹 **Time Complexities:**
+• Access: O(n) - Must traverse from head
+• Search: O(n) - Linear search
+• Insertion: O(1) at head, O(n) at position
+• Deletion: O(1) at head, O(n) at position
+
+🔹 **Advantages:**
+✅ Dynamic size
+✅ Efficient insertion/deletion at beginning
+✅ Memory efficient (no wasted space)
+
+🔹 **Disadvantages:**
+❌ No random access
+❌ Extra memory for pointers
+❌ Not cache-friendly
+
+Ready to explore specific linked list operations?`,
+
+      "stack": `📚 **Stack - Last In, First Out (LIFO)**
+
+🔹 **Core Operations:**
+• Push: Add element to top - O(1)
+• Pop: Remove element from top - O(1)
+• Peek/Top: View top element - O(1)
+• isEmpty: Check if stack is empty - O(1)
+
+🔹 **Implementation Options:**
+• Array-based: Fixed size, simple
+• Linked list-based: Dynamic size
+
+🔹 **Real-World Applications:**
+• Function call management (call stack)
+• Undo operations in editors
+• Expression evaluation and syntax parsing
+• Browser back button functionality
+• Depth-First Search (DFS) traversal
+
+🔹 **Problem-Solving Patterns:**
+• Parentheses matching
+• Reverse Polish notation
+• Monotonic stack problems
+
+Want to explore stack-based algorithms or see implementations?`,
+
+      "recursion": `🔄 **Recursion - Elegant Problem Solving**
+
+🔹 **Key Components:**
+• Base Case: Condition to stop recursion
+• Recursive Case: Function calls itself with smaller input
+
+🔹 **How It Works:**
+Each recursive call adds a new frame to the call stack. When base case is reached, functions return in reverse order.
+
+🔹 **Types:**
+• Direct: Function calls itself
+• Indirect: Functions call each other cyclically
+• Tail Recursion: Recursive call is the last operation
+
+🔹 **Common Patterns:**
+• Divide & Conquer: Merge sort, quick sort
+• Tree Traversal: DFS, tree operations
+• Backtracking: N-queens, sudoku solver
+• Mathematical: Factorial, fibonacci
+
+🔹 **Time/Space Analysis:**
+Often O(n) space due to call stack overhead.
+
+Ready to master recursive thinking with specific examples?`,
+
+      "sorting": `🎲 **Sorting Algorithms - Organizing Data Efficiently**
+
+🔹 **Popular Algorithms:**
+
+**Simple Sorts:**
+• Bubble Sort: O(n²) - Educational, inefficient
+• Selection Sort: O(n²) - Unstable, simple
+• Insertion Sort: O(n²) - Good for small/nearly sorted
+
+**Efficient Sorts:**
+• Merge Sort: O(n log n) - Stable, divide & conquer
+• Quick Sort: O(n log n) avg - In-place, cache-efficient
+• Heap Sort: O(n log n) - In-place, not stable
+
+**Special Purpose:**
+• Counting Sort: O(n+k) - For integers in range
+• Radix Sort: O(d×n) - For fixed-width data
+• Bucket Sort: O(n) avg - For uniformly distributed data
+
+🔹 **Choosing the Right Sort:**
+• Stability needed? → Merge Sort
+• Memory constrained? → Heap Sort
+• Average case performance? → Quick Sort
+• Small dataset? → Insertion Sort
+
+Which sorting algorithm interests you most?`
     };
 
     const lowerMessage = userMessage.toLowerCase();
@@ -44,6 +223,22 @@ export default function App() {
         return response;
       }
     }
+    
+    // More intelligent fallback responses
+    if (lowerMessage.includes("what") || lowerMessage.includes("explain") || lowerMessage.includes("how")) {
+      return `🤔 **I'd love to help you learn!** 
+
+I can provide detailed explanations about:
+• **Data Structures**: Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hash Tables
+• **Algorithms**: Sorting, Searching, Graph Traversal, Dynamic Programming
+• **Concepts**: Time/Space Complexity, Big O Notation, Recursion
+
+Try asking something like:
+"What is an array?" or "Explain binary search" or "How does recursion work?"
+
+What specific topic would you like to explore? 🚀`;
+    }
+    
     return "That's a great question! In DSA, we focus on efficient problem-solving. Could you be more specific about which data structure or algorithm you'd like to learn about?";
   };
 

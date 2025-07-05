@@ -673,31 +673,32 @@ The more specific your question, the more detailed explanation I can provide! �
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-900 via-emerald-800 to-green-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl bg-gray-900/90 backdrop-blur-sm shadow-2xl rounded-2xl p-6 space-y-4 border border-green-600/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-800 to-green-900 flex items-center justify-center p-4">
+      <div className="w-full max-w-3xl bg-purple-900/80 backdrop-blur-xl shadow-2xl rounded-3xl p-6 space-y-5 border border-green-500/20">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
             🤖 DSA Instructor AI
           </h1>
+
           <button
             onClick={clearChat}
-            className="text-gray-400 hover:text-green-300 text-sm px-4 py-2 rounded-lg hover:bg-green-900/30 border border-green-700/50 hover:border-green-500/50 transition-all duration-200"
+            className="text-xs px-4 py-2 rounded-lg bg-green-900/50 text-green-200 hover:bg-blue-800/70 border border-green-500/30 transition hover:scale-105"
           >
-            ✨ Clear Chat
+            🔄 Reset
           </button>
         </div>
 
         {showSuggestions && (
-          <div className="bg-green-900/40 backdrop-blur-sm rounded-xl p-5 border border-green-600/40 shadow-lg">
-            <h3 className="text-sm font-semibold text-green-300 mb-3 flex items-center">
-              💡 Quick Questions to Get Started:
+          <div className="bg-blue-900/40 backdrop-blur-sm rounded-xl p-5 border border-blue-600/40 shadow-inner">
+            <h3 className="text-sm font-semibold text-emerald-300 mb-3 flex items-center">
+              ✨ Quick Questions to Get Started:
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {quickQuestions.map((question, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleQuickQuestion(question)}
-                  className="text-xs bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white px-4 py-2 rounded-full transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-green-500/25"
+                  className="text-xs bg-gradient-to-tr from-blue-700 to-emerald-500 hover:from-blue-600 hover:to-emerald-400 text-white px-4 py-2 rounded-full shadow-md hover:shadow-emerald-500/40 transition-transform transform hover:scale-105"
                 >
                   {question}
                 </button>
@@ -706,33 +707,28 @@ The more specific your question, the more detailed explanation I can provide! �
           </div>
         )}
 
-        <div className="h-96 overflow-y-auto space-y-3 px-3 scrollbar-thin scrollbar-thumb-green-600 scrollbar-track-gray-800/50 bg-gray-800/30 rounded-xl border border-green-700/20">
+        <div className="h-96 overflow-y-auto space-y-3 px-3 scrollbar-thin scrollbar-thumb-emerald-500 scrollbar-track-gray-800 rounded-xl border border-emerald-600/20 bg-black/10">
           {messages.map((msg, idx) => (
             <ChatBubble key={idx} message={msg} />
           ))}
-          
+
           {isTyping && (
-            <div className="flex justify-start animate-fade-in">
-              <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-5 py-3 rounded-2xl max-w-xs shadow-lg border border-green-400/30">
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium">🧠 AI is thinking</span>
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
-                    <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                    <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-                  </div>
-                </div>
+            <div className="flex items-center space-x-2 text-white text-sm animate-pulse px-4">
+              <span>AI is thinking</span>
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce" />
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-100" />
+                <div className="w-2 h-2 bg-white rounded-full animate-bounce delay-200" />
               </div>
             </div>
           )}
-          
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="flex gap-3">
             <input
-              className="flex-1 px-5 py-3 border border-green-600/50 bg-gray-800/80 text-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 placeholder-gray-400 transition-all duration-200 backdrop-blur-sm shadow-inner"
+              className="flex-1 px-5 py-3 border border-blue-600/40 bg-blue-900/80 text-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400 placeholder-gray-400 transition-all duration-200 shadow-inner"
               type="text"
               placeholder="💬 Ask about Data Structures & Algorithms..."
               value={input}
@@ -743,14 +739,13 @@ The more specific your question, the more detailed explanation I can provide! �
             <button
               onClick={handleSend}
               disabled={isTyping || !input.trim()}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white px-8 py-3 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-green-500/25 font-semibold"
+              className="bg-gradient-to-r from-blue-500 to-emerald-500 hover:from-blue-400 hover:to-emerald-400 text-darkblue px-6 py-3 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isTyping ? "⏳" : "🚀 Send"}
             </button>
           </div>
-          
-          <div className="text-sm text-green-300/80 text-center bg-green-900/20 py-2 px-4 rounded-lg border border-green-700/30">
-            ✨ Tip: Ask about specific algorithms, data structures, or complexity analysis!
+          <div className="text-xs text-black-1100/90 text-center bg-black-1100/30 py-2 px-4 rounded-lg border border-black-1100/40">
+            💡 Pro Tip: Try asking about trees, graphs, or dynamic programming.
           </div>
         </div>
       </div>

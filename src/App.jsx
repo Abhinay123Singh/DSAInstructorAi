@@ -1,6 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ChatBubble from "./components/ChatBubble";
-import "./App.css";
 
 export default function App() {
   const [messages, setMessages] = useState([
@@ -10,39 +9,36 @@ export default function App() {
 
   const handleSend = () => {
     if (!input.trim()) return;
-    const userMessage = { type: "user", text: input };
-    const aiReply = { type: "ai", text: generateAIResponse(input) };
-    setMessages((prev) => [...prev, userMessage, aiReply]);
+    setMessages([...messages, { type: "user", text: input }]);
+    setTimeout(() => {
+      setMessages((prev) => [...prev, { type: "ai", text: "Here's an answer to your DSA query!" }]);
+    }, 1000);
     setInput("");
   };
 
-  const generateAIResponse = (input) => {
-    // Placeholder: replace with AI logic or backend call
-    if (input.toLowerCase().includes("stack")) return "A stack is a LIFO data structure.";
-    if (input.toLowerCase().includes("queue")) return "A queue is a FIFO data structure.";
-    return "That's a great question! Let me find the best answer for you.";
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-4">
-      <div className="w-full max-w-md bg-white rounded shadow-lg p-4 flex flex-col">
-        <h2 className="text-xl font-bold text-center mb-4">DSA Instructor AI</h2>
-        <div className="flex-1 space-y-2 overflow-y-auto mb-4 max-h-[400px]">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-purple-100 to-pink-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-xl bg-white shadow-xl rounded-lg p-6 space-y-4">
+        <h1 className="text-2xl font-bold text-center text-indigo-700">🤖 DSA Instructor AI</h1>
+
+        <div className="h-96 overflow-y-auto space-y-2 px-2 scrollbar-thin">
           {messages.map((msg, idx) => (
             <ChatBubble key={idx} message={msg} />
           ))}
         </div>
-        <div className="flex">
+
+        <div className="flex gap-2">
           <input
+            className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
             type="text"
+            placeholder="Ask about Data Structures & Algorithms..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about Data Structures & Algorithms..."
-            className="flex-1 border px-4 py-2 rounded-l outline-none"
+            onKeyDown={(e) => e.key === "Enter" && handleSend()}
           />
           <button
             onClick={handleSend}
-            className="bg-blue-600 text-white px-4 py-2 rounded-r hover:bg-blue-700"
+            className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg transition"
           >
             Send
           </button>

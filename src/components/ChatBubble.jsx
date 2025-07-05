@@ -1,11 +1,10 @@
-// src/components/ChatBubble.jsx
 export default function ChatBubble({ message }) {
   const isAI = message.type === "ai";
 
   return (
-    <div className={`flex ${isAI ? "justify-start" : "justify-end"} my-1`}>
+    <div className={`flex ${isAI ? "justify-start" : "justify-end"} animate-fade-in`}>
       <div
-        className={`max-w-[75%] px-4 py-2 rounded-lg shadow text-white ${
+        className={`px-4 py-2 rounded-xl text-white max-w-xs ${
           isAI ? "bg-green-500" : "bg-blue-600"
         }`}
       >

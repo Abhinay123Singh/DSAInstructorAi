@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ChatBubble from "./components/ChatBubble";
+import "./App.css";
 
 export default function App() {
   const [messages, setMessages] = useState([
